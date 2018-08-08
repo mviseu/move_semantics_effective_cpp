@@ -1,8 +1,8 @@
 # Move Semantics #
 
-@color[gray](Effective Modern C++: rvalue references, move semantics and perfect forwarding)
+@color[gray](Scott Meyers: Effective Modern C++)
 
-@color[gray](Scott Meyers)
+@color[gray](Maria Viseu)
 
 ---
 
@@ -152,8 +152,6 @@ logAndProcess(w);	// call with lvalue
 logAndProcess(std::move(w));    // call with rvalue
 
 ```
-@[4-14]
-@[16-18]
 ---
 
 ### @color[orange](std::move) and @color[orange](std::forward)
@@ -182,12 +180,12 @@ void f3(T&& param);
 template<typename T>
 void f4(const T&& param);
 ```
+@[1-1]
 @[3-3]
 @[5-5]
-@[7-7]
-@[9-10]
-@[12-13]
-@[15-16]
+@[7-8]
+@[10-11]
+@[13-14]
 ---
 Solutions...
 ```cpp
@@ -307,8 +305,6 @@ w.setName(n);
 // what happens to n?
 
 ```
-@[3-16]
-@[18-26]
 ---
 
 ### std::move
