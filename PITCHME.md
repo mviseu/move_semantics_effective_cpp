@@ -96,13 +96,13 @@ move(T&& param) {
 ---
 
 ### std::move
-Good Example
+@color[grey](Good example)
 
 ```cpp
 class Annotation {
 public:
 	explicit Annotation(std::string text) // passed by value
-	: value(std::move(text)); 			  // moves text into value
+	: value(std::move(text)); 			// moves text into value
 ...
 private:
 	std::string value;
@@ -111,7 +111,7 @@ private:
 ---
 
 ### std::move
-Bad Example
+@color[grey](Bad example)
 ```cpp
 class Annotation {
 public:
@@ -125,15 +125,16 @@ private:
 ---
 
 ### std::move
-Lessons
+@color[grey](Lessons)
 * Don't declare objects const if you want to move them	
+
 * std::move casts to rvalue reference but it doesn't:
   * Move text (this is done by the std::string constructor)
   * Guarantee that text will be moved
 ---
 
 ### std::forward
-Example
+@color[grey](Example)
 ```cpp
 void process(const Widget& lvalArg);		// process lvalues
 void process(Widget&& rvalArg); 			// process rvalues
@@ -157,8 +158,9 @@ logAndProcess(std::move(w));	// call with rvalue
 ---
 
 ### std::move and std::forward
-Summary
+@color[grey](Summary)
 * std::move performs unconditional cast to an rvalue
+
 * std::forward casts its argument to an rvalue if that argument is bound to an rvalue
 ---
 
@@ -166,7 +168,7 @@ Summary
 ---
 
 ### Distinguish universal references from rvalue references
-Examples
+@color[grey](Examples)
 
 Which types are value references?
 ```cpp
@@ -195,7 +197,7 @@ void f(const T&& param);
 
 ### Distinguish universal references from rvalue references
 
-Examples
+@color[grey](Examples)
 ```cpp
 void f(Widget&& param);			// rvalue reference
 
@@ -216,6 +218,7 @@ void f(const T&& param);		// rvalue reference
 
 ### Distinguish universal references from rvalue references
 * rvalue references: bind to rvalues, and identify eligible objects for moving
+
 * universal references: bind to anything
 ---
 
@@ -223,11 +226,12 @@ void f(const T&& param);		// rvalue reference
 * Arise in type deduction contexts:
   * Template parameters
   * Auto declarations
+
 * The form of the type declaration must be precisely T&&
 ---
 
 ### Universal references
-Initializers
+@color[grey](Initializers)
 ```cpp
 template<typename T>
 void f(T&& param);		// param is a universal reference
@@ -241,9 +245,11 @@ f(std::move(w));		// rvalue passed to fl param's type is Widget&&
 ---
 
 ### Universal references
-Summary
+@color[grey](Summary)
 * If function template parameter has type T&& for a deduced type, or if object is declared using auto&&, the parameter or object is a universal reference
+
 * If the form is not precisely type&& or if type deduction does not occur, type&& denotes an rvalue reference.
+
 * Universal references are rvalue references if initialized with rvalues, or lvalue references if initialized with lvalues
 ---
 
@@ -251,7 +257,7 @@ Summary
 ---
 
 ### Use std::move on rvalue references
-Example
+@color[grey](Example)
 
 ```cpp
 class Widget {
@@ -267,7 +273,7 @@ private:
 ---
 
 ### Use std::forward on universal references
-Example
+@color[grey](Example)
 
 ```cpp
 class Widget {
@@ -314,9 +320,11 @@ w.setName(n);
 ---
 
 ### std::move
-Good example
+@color[grey](Good example)
 * Function returns by value
+
 * We return an object bound to an rvalue reference
+
 * Use std::move!
 
 ```cpp
@@ -353,9 +361,11 @@ Widget makeWidget() {
 
 ---
 ### Use std::move on rvalue references, std::forward on universal references
-Summary
+@color[grey](Summary)
 	- Apply std::move to rvalue references and std::forward to universal references
+
 	- Do the same thing for rvalue references and universal references that are returned from functions by value
+
 	- Don't apply std::move or std::forward to local objects that are eligible for RVO
 ---
 
@@ -364,27 +374,33 @@ Summary
 
 ### Assume move operations are not present, not cheap, and not used
 * Move semantics is arguably the premier feature of C++
+
 * But let's keep expectation grounded
 ---
 
 ### Move operations aren't always present
 * Standard types were all updated in C++11 to take advantage of move constructors/assignment operators
+
 * But we might be using old libraries...
+
 * Or our own types might not respect the rule of 5 and so move operations might be disabled
 ---
 
 ### Move operations aren't always that cheap
 * Most containers store memory on the heap, and hold a pointer to this memory that stores all the elements of the container (e.g. std::vector)
+
 * There are containers that behave differently (e.g. std::array)
 ---
 
 ### Move operations aren't always used
 * Strong exception safety guarantee
+
 * Make sure move operations don't throw and mark them noexcept!
 ---
 
 ## Conclusion
 * Assume that move operations are not present, not cheap, not used.
+
 * In code with known types & support for move semantics don't assume: use move semantics!
 ---
 
