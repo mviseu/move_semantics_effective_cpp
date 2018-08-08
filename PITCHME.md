@@ -11,14 +11,13 @@
 * @size[0.9em](Understand std::move and std::forward)
 * @size[0.9em](Distinguish universal references from rvalue references)
 * @size[0.9em](Use std::move on rvalue references, std::forward on universal references)
-* @size[0.9em](Assume that move operations are not present, not cheap and not used)
 ---
 
 ## @color[orange](lvalues) and @color[orange](rvalues)
 ---
 
 ### lvalues and rvalues
-* Distinguishing expressions that are rvalues from those that are rvalues is the foundation of move semantics
+* Distinguishing expressions that are lvalues from those that are rvalues is the foundation of move semantics
 * rvalues indicate objects that are eligible for moving
 ---
 
@@ -52,7 +51,7 @@ public:
 @size[1.5em](Understand @color[orange](std::move) and @color[orange](std::forward))
 ---
 @size[1.5em](@color[orange](std::move))
-* Replace expensive copy operations with less expensive moves using move constructors and assignment operators
+* Replace expensive copy operations with less expensive moves using move constructors, move assignment operators, etc.
 
 * Enable the creation of move-only types (std::unique_ptr)
 ---
@@ -168,20 +167,20 @@ logAndProcess(std::move(w));    // call with rvalue
 ---
 Which types are rvalue references?
 ```cpp
-void f(Widget&& param);
+void f1(Widget&& param);
 
 Widget&& var1 = Widget();
 
 auto&& var2 = var1;
 
 template<typename T>
-void f(std::vector<T>&& param);
+void f2(std::vector<T>&& param);
 
 template<typename T>
-void f(T&& param);
+void f3(T&& param);
 
 template<typename T>
-void f(const T&& param);
+void f4(const T&& param);
 ```
 @[3-3]
 @[5-5]
@@ -192,20 +191,20 @@ void f(const T&& param);
 ---
 Solutions...
 ```cpp
-void f(Widget&& param);			// rvalue reference
+void f1(Widget&& param);			// rvalue reference
 
 Widget&& var1 = Widget();		  // rvalue reference
 
 auto&& var2 = var1;				// universal reference
 
 template<typename T>
-void f(std::vector<T>&& param);	// rvalue reference
+void f2(std::vector<T>&& param);	// rvalue reference
 
 template<typename T>
-void f(T&& param);				 // universal reference
+void f3(T&& param);				 // universal reference
 
 template<typename T>
-void f(const T&& param);		   // rvalue reference
+void f4(const T&& param);		   // rvalue reference
 ```
 ---
 
@@ -274,7 +273,7 @@ public:
 	template<typename T>
 	void newName(T&& rhs)	// newName is a universal reference
 	{
-		name = std::forward<T>(newName);
+		name = std::forward<T>(rhs);
 	}
 ...
 };
@@ -288,7 +287,7 @@ public:
 	template<typename T>
 	void newName(T&& rhs)	// newName is a universal reference
 	{
-		name = std::move(newName);
+		name = std::move(rhs);
 	}
 ...
 
@@ -364,46 +363,6 @@ If conditions for RVO are met, but compilers choose not to perform copy elision,
 * @size[0.8em](Do the same thing for rvalue references and universal references that are returned from functions by value)
 
 * @size[0.8em](Don't apply std::move or std::forward to local objects that are eligible for RVO)
----
-
-@size[1.5em](Assume move operations are @color[orange](not present), @color[orange](not cheap), and @color[orange](not used))
----
-
-@size[1.1em](Assume move operations are not present, not cheap, and not used)
-
-* Move semantics is arguably the premier feature of C++
-
-* But let's keep expectation grounded...
----
-
-@size[1.1em](Move operations aren't always present)
-
-* @size[0.8em](Standard types were all updated in C++11 to take advantage of move constructors/assignment operators)
-
-* @size[0.8em](But we might be using old libraries...)
-
-* @size[0.8em](Or our own types might not respect the rule of 5 and so move operations might be disabled)
----
-
-@size[1.1em](Move operations aren't always that cheap)
-
-* @size[0.8em](Most containers store memory on the heap, and hold a pointer to this memory that stores all the elements of the container (e.g. std::vector))
-
-* @size[0.8em](There are containers that behave differently (e.g. std::array))
----
-
-@size[1.1em](Move operations aren't always used)
-
-* @size[0.8em](Strong exception safety guarantee)
-
-* @size[0.8em](Make sure move operations don't throw and mark them noexcept!)
----
-
-## Conclusion
-
-* Assume that move operations are not present, not cheap, not used.
-
-* In code with known types & support for move semantics don't assume: use move semantics!
 ---
 
 ## @size[1.5em](@color[grey](The End))
