@@ -129,8 +129,8 @@ private:
 * Don't declare objects const if you want to move them	
 
 * std::move casts to rvalue reference but it doesn't:
-  * Move text (this is done by the std::string constructor)
-  * Guarantee that text will be moved
+  * Move @color[orange](text) (this is done by the std::string constructor)
+  * Guarantee that @color[orange](text) will be moved
 ---
 
 ### std::forward
