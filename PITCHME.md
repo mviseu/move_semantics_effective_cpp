@@ -353,24 +353,27 @@ Widget makeWidget() {
 ### @color[orange](Return value optimization)
 
 If conditions for RVO are met, but compilers choose not to perform copy elision, then they must treat the return object as an rvalue
-
----
-### Use std::move on rvalue references, std::forward on universal references
-@color[grey](Summary)
-	- Apply std::move to rvalue references and std::forward to universal references
-
-	- Do the same thing for rvalue references and universal references that are returned from functions by value
-
-	- Don't apply std::move or std::forward to local objects that are eligible for RVO
 ---
 
-## Assume move operations are not present, not cheap, and not used
+@size[1.0em](Use std::move on rvalue references, std::forward on universal references)
+
+@size[0.9em](@color[grey](Summary))
+
+* @size[0.8em](Apply std::move to rvalue references and std::forward to universal references)
+
+* @size[0.8em](Do the same thing for rvalue references and universal references that are returned from functions by value)
+
+* @size[0.8em](Don't apply std::move or std::forward to local objects that are eligible for RVO)
 ---
 
-### Assume move operations are not present, not cheap, and not used
+@size[1.5em](Assume move operations are @color[orange](not present), @color[orange](not cheap), and @color[orange](not used))
+---
+
+@size[1.1em](Assume move operations are not present, not cheap, and not used)
+
 * Move semantics is arguably the premier feature of C++
 
-* But let's keep expectation grounded
+* But let's keep expectation grounded...
 ---
 
 ### Move operations aren't always present
