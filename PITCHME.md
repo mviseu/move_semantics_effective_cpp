@@ -1,6 +1,6 @@
 # Move Semantics #
 
-@color[gray](Effective Modern C++: Rvalue references, move semantics and perfect forwarding)
+@color[gray](Effective Modern C++: rvalue references, move semantics and perfect forwarding)
 
 @color[gray](Scott Meyers)
 
@@ -14,34 +14,31 @@
 * Assume that move operations are not present, not cheap and not used
 ---
 
-## lvalues and rvalues
+## @color[orange](lvalues) and @color[orange](rvalues)
 ---
 
 ### lvalues and rvalues
-* distinguishing expressions that are rvalues from those that are rvalues is the foundation of move semantics
+* Distinguishing expressions that are rvalues from those that are rvalues is the foundation of move semantics
 * rvalues indicate objects that are eligible for moving
 ---
 
 ### lvalues and rvalues
-Examples
+@color[grey](Examples)
 ```cpp
 
 void someFunc(Widget w); // someFunc's parameter passed by value
 
-Widget wid; 			 // wid is some Widget
+Widget wid;
 
-someFun(wid); 			 // wid is an lvalue
-			  			 // w is a copy of widget that's created via copy constructor
+someFun(wid); // w is a copy of widget that's created via copy constructor
 
-someFun(Widget()); 		 // the temporary Widget is an rvalue
-						 // w is a copy of widget that's created via move constructor
+someFun(Widget()); // w is a copy of widget that's created via move constructor
 
 ```
 ---
 
 ### lvalues and rvalues
-Expressions vs. Types
-* The type of an expression is independent of whether it is an rvalue or lvalue
+@size[0.7em](The type of an expression is independent of whether it is an rvalue or lvalue)
 
 ```cpp
 class Widget {
@@ -52,7 +49,7 @@ public:
 ```
 ---
 
-## Understand std::move and std::forward
+@size[1.5em](Understand @color[orange](std::move) and @color[orange](std::forward))
 ---
 
 ### Understand std::move and std::forward
