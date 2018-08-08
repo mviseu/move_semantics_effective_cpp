@@ -157,14 +157,14 @@ logAndProcess(std::move(w));	// call with rvalue
 @[152-154]
 ---
 
-### std::move and std::forward
+### @color[orange](std::move) and @color[orange](std::forward)
 @color[grey](Summary)
 * std::move performs unconditional cast to an rvalue
 
 * std::forward casts its argument to an rvalue if that argument is bound to an rvalue
 ---
 
-## Distinguish universal references from rvalue references
+@size[1.5em](Distinguish universal references from rvalue references)
 ---
 
 ### Distinguish universal references from rvalue references
