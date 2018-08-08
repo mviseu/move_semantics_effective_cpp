@@ -65,15 +65,12 @@ public:
 
 ### @color[orange](std::move) and @color[orange](std::forward)
 
-Do not...
+do not...
 
 ... move anything
 
 ... forward anything
 
-@[68-68]
-@[70-70]
-@[72-72]
 ---
 
 ### std::move and std::forward
