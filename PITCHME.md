@@ -190,14 +190,11 @@ void f(const T&& param);
 @[184-185]
 @[187-188]
 ---
-
-### Distinguish universal references from rvalue references
-
-@color[grey](Examples)
+Solutions...
 ```cpp
 void f(Widget&& param);			// rvalue reference
 
-Widget&& var1 = Widget();		// rvalue reference
+Widget&& var1 = Widget();		  // rvalue reference
 
 auto&& var2 = var1;				// universal reference
 
@@ -205,17 +202,17 @@ template<typename T>
 void f(std::vector<T>&& param);	// rvalue reference
 
 template<typename T>
-void f(T&& param);				// universal reference
+void f(T&& param);				 // universal reference
 
 template<typename T>
-void f(const T&& param);		// rvalue reference
+void f(const T&& param);		   // rvalue reference
 ```
 ---
 
-### Distinguish universal references from rvalue references
+### Distinguish @color[orange](universal) references from  @color[orange](rvalue) references
 * rvalue references: bind to rvalues, and identify eligible objects for moving
 
-* universal references: bind to anything
+* universal references: bind to everything!
 ---
 
 ### Universal references
@@ -233,20 +230,20 @@ template<typename T>
 void f(T&& param);		// param is a universal reference
 
 Widget w;
-f(w);					// lvalue passed to f; param's type is Widget&
+f(w);					 // lvalue passed to f; param's type is Widget&
 
-f(std::move(w));		// rvalue passed to fl param's type is Widget&&
+f(std::move(w));		  // rvalue passed to fl param's type is Widget&&
 
 ```
 ---
 
 ### Universal references
 @color[grey](Summary)
-* If function template parameter has type T&& for a deduced type, or if object is declared using auto&&, the parameter or object is a universal reference
+* @size[0.8em](If function template parameter has type T&& for a deduced type, or if object is declared using auto&&, the parameter or object is a universal reference)
 
-* If the form is not precisely type&& or if type deduction does not occur, type&& denotes an rvalue reference.
+* @size[0.8em](If the form is not precisely type&& or if type deduction does not occur, type&& denotes an rvalue reference)
 
-* Universal references are rvalue references if initialized with rvalues, or lvalue references if initialized with lvalues
+* @size[0.8em](Universal references are rvalue references if initialized with rvalues, or lvalue references if initialized with lvalues)
 ---
 
 ## Use std::move on rvalue references, std::forward on universal references
