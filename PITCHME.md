@@ -376,27 +376,31 @@ If conditions for RVO are met, but compilers choose not to perform copy elision,
 * But let's keep expectation grounded...
 ---
 
-### Move operations aren't always present
-* Standard types were all updated in C++11 to take advantage of move constructors/assignment operators
+@size[1.1em](Move operations aren't always present)
 
-* But we might be using old libraries...
+* @size[0.8em](Standard types were all updated in C++11 to take advantage of move constructors/assignment operators)
 
-* Or our own types might not respect the rule of 5 and so move operations might be disabled
+* @size[0.8em](But we might be using old libraries...)
+
+* @size[0.8em](Or our own types might not respect the rule of 5 and so move operations might be disabled)
 ---
 
-### Move operations aren't always that cheap
-* Most containers store memory on the heap, and hold a pointer to this memory that stores all the elements of the container (e.g. std::vector)
+@size[1.1em](Move operations aren't always that cheap)
 
-* There are containers that behave differently (e.g. std::array)
+* @size[0.8em](Most containers store memory on the heap, and hold a pointer to this memory that stores all the elements of the container (e.g. std::vector))
+
+* @size[0.8em](There are containers that behave differently (e.g. std::array))
 ---
 
-### Move operations aren't always used
-* Strong exception safety guarantee
+@size[1.1em](Move operations aren't always used)
 
-* Make sure move operations don't throw and mark them noexcept!
+* @size[0.8em]((Strong exception safety guarantee)
+
+* @size[0.8em](Make sure move operations don't throw and mark them noexcept!)
 ---
 
 ## Conclusion
+
 * Assume that move operations are not present, not cheap, not used.
 
 * In code with known types & support for move semantics don't assume: use move semantics!
