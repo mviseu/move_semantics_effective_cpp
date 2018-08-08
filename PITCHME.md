@@ -166,10 +166,6 @@ logAndProcess(std::move(w));	// call with rvalue
 
 @size[1.5em](Distinguish universal references from rvalue references)
 ---
-
-### Distinguish universal references from rvalue references
-@color[grey](Examples)
-
 Which types are value references?
 ```cpp
 void f(Widget&& param);
