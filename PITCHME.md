@@ -51,18 +51,19 @@ public:
 
 @size[1.5em](Understand @color[orange](std::move) and @color[orange](std::forward))
 ---
-
-### Understand std::move and std::forward
-General Idea
-Move
+@size[1.5em](@color[orange](std::move))
 * Replace expensive copy operations with less expensive moves using move constructors and assignment operators
+
 * Enable the creation of move-only types (std::unique_ptr)
-Forward
-* Used with function templates take arbitrary arguments and forward them to other functions such that the target functions receive the same arguments as the forwarding functions. 
-* Preserve r-valueness/l-valueness or non-constness/constness. 
 ---
 
-### std::move and std::forward
+@size[1.5em](@color[orange](std::forward))
+* Used with function templates take arbitrary arguments and forward them to other functions such that the target functions receive the same arguments as the forwarding functions
+
+* Preserve r-valueness/l-valueness or non-constness/constness
+---
+
+### @color[orange](std::move) and @color[orange](std::forward)
 
 Do not...
 
@@ -70,6 +71,9 @@ Do not...
 
 ... forward anything
 
+@[68-68]
+@[70-70]
+@[72-72]
 ---
 
 ### std::move and std::forward
