@@ -73,17 +73,17 @@ do not...
 
 ---
 
-### std::move and std::forward
-Do...
+### @color[orange](std::move) and @color[orange](std::forward)
 
-... cast
+they cast...
 
 * std::move unconditionally casts its argument to an rvalue that might be eligible for moving
+
 * std::forward performs a cast to an rvalue only if a particular condition is fullfilled
 ---
 
 ### std::move
-Simplified implementation
+@color[grey](Simplified implementation)
 ```cpp
 template <typename T>
 typename remove_reference<T>::type&&
