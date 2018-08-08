@@ -166,7 +166,7 @@ logAndProcess(std::move(w));	// call with rvalue
 
 @size[1.5em](Distinguish universal references from rvalue references)
 ---
-Which types are value references?
+Which types are rvalue references?
 ```cpp
 void f(Widget&& param);
 
@@ -239,14 +239,14 @@ f(std::move(w));		  // rvalue passed to fl param's type is Widget&&
 
 ### Universal references
 @color[grey](Summary)
-* @size[0.8em](If function template parameter has type T&& for a deduced type, or if object is declared using auto&&, the parameter or object is a universal reference)
+* @size[0.8em](If a function template parameter has type T&& for a deduced type, or if object is declared using auto&&, the parameter or object is a universal reference)
 
 * @size[0.8em](If the form is not precisely type&& or if type deduction does not occur, type&& denotes an rvalue reference)
 
 * @size[0.8em](Universal references are rvalue references if initialized with rvalues, or lvalue references if initialized with lvalues)
 ---
 
-## Use std::move on rvalue references, std::forward on universal references
+@size[1.5em](Use std::move on rvalue references, std::forward on universal references)
 ---
 
 ### Use std::move on rvalue references
@@ -324,7 +324,7 @@ w.setName(n);
 Matrix											// by value return
 operator+(Matrix&& lhs, const Matrix& rhs) {
 	lhs += rhs;
-	return std::move(lhs);						// move lhs into return value
+	return std::move(lhs);			// move lhs into return value
 }
 
 ```
@@ -341,16 +341,18 @@ Widget makeWidget() {
 ```
 ---
 
-### Return Value Optimization
-"Compilers may elide the copying or moving of a local object in a function that returns by value if:
+### @color[orange](Return value optimization)
 
-	1) the type of the local object is the same as the type returned by the function and 
+@size[0.8em](Compilers may elide the copying or moving of a local object in a function that returns by value if:)
 
-	2) the local object is what is being returned"
+- @size[0.8em](the type of the local object is the same as the type returned by the function and)
+
+- @size[0.8em](the local object is what is being returned)
 ---
 
-### Return Value Optimization
-"If conditions for RVO are met, but compilers choose not to perform copy elision, then they must treat the return object as an rvalue"
+### @color[orange](Return value optimization)
+
+If conditions for RVO are met, but compilers choose not to perform copy elision, then they must treat the return object as an rvalue
 
 ---
 ### Use std::move on rvalue references, std::forward on universal references
