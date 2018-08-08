@@ -153,8 +153,8 @@ logAndProcess(w);	// call with lvalue
 logAndProcess(std::move(w));    // call with rvalue
 
 ```
-@[140-150]
-@[152-154]
+@[4-14]
+@[16-18]
 ---
 
 ### @color[orange](std::move) and @color[orange](std::forward)
@@ -183,12 +183,12 @@ void f(T&& param);
 template<typename T>
 void f(const T&& param);
 ```
-@[175-175]
-@[177-177]
-@[179-179]
-@[181-182]
-@[184-185]
-@[187-188]
+@[3-3]
+@[5-5]
+@[7-7]
+@[9-10]
+@[12-13]
+@[15-16]
 ---
 Solutions...
 ```cpp
@@ -308,8 +308,8 @@ w.setName(n);
 // what happens to n?
 
 ```
-@[289-301]
-@[304-311]
+@[3-16]
+@[18-26]
 ---
 
 ### std::move
