@@ -7,11 +7,11 @@
 ---
 
 ## Content
-* lvalues and rvalues
-* Understand std::move and std::forward
-* Distinguish universal references from rvalue references
-* Use std::move on rvalue references, std::forward on universal references
-* Assume that move operations are not present, not cheap and not used
+* @size[0.9em](lvalues and rvalues)
+* @size[0.9em](Understand std::move and std::forward)
+* @size[0.9em](Distinguish universal references from rvalue references)
+* @size[0.9em](Use std::move on rvalue references, std::forward on universal references)
+* @size[0.9em](Assume that move operations are not present, not cheap and not used)
 ---
 
 ## @color[orange](lvalues) and @color[orange](rvalues)
@@ -116,7 +116,7 @@ private:
 class Annotation {
 public:
 	explicit Annotation(const std::string text) // passed by value
-	: value(std::move(text)); 					// this code does not do what it seems to do!
+	: value(std::move(text)); 				  // this code does not do what it seems to do!
 ...
 private:
 	std::string value;
@@ -136,8 +136,8 @@ private:
 ### std::forward
 @color[grey](Example)
 ```cpp
-void process(const Widget& lvalArg);		// process lvalues
-void process(Widget&& rvalArg); 			// process rvalues
+void process(const Widget& lvalArg); // process lvalues
+void process(Widget&& rvalArg); // process rvalues
 
 template<typename T>
 void logAndProcess(T&& param)
@@ -149,8 +149,8 @@ void logAndProcess(T&& param)
 // calls to logAndProcess
 
 Widget w;
-logAndProcess(w);				// call with lvalue
-logAndProcess(std::move(w));	// call with rvalue
+logAndProcess(w);	// call with lvalue
+logAndProcess(std::move(w));    // call with rvalue
 
 ```
 @[140-150]
@@ -394,7 +394,7 @@ If conditions for RVO are met, but compilers choose not to perform copy elision,
 
 @size[1.1em](Move operations aren't always used)
 
-* @size[0.8em]((Strong exception safety guarantee)
+* @size[0.8em](Strong exception safety guarantee)
 
 * @size[0.8em](Make sure move operations don't throw and mark them noexcept!)
 ---
