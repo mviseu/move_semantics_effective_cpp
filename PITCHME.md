@@ -10,7 +10,7 @@
 * @size[0.9em](lvalues and rvalues)
 * @size[0.9em](Understand std::move and std::forward)
 * @size[0.9em](Distinguish universal references from rvalue references)
-* @size[0.9em](Use std::move on rvalue references, std::forward on universal references)
+* @size[0.9em](When to use std::move and std::forward)
 ---
 
 ## @color[orange](lvalues) and @color[orange](rvalues)
@@ -59,7 +59,7 @@ public:
 @size[1.5em](@color[orange](std::forward))
 * Used with function templates take arbitrary arguments and forward them to other functions such that the target functions receive the same arguments as the forwarding functions
 
-* Preserve r-valueness/l-valueness or non-constness/constness
+* Preserves r-valueness/l-valueness or non-constness/constness
 ---
 
 ### @color[orange](std::move) and @color[orange](std::forward)
@@ -297,6 +297,8 @@ auto n = getWidgetName();
 w.setName(n);
 
 // what happens to n?
+std::cout << n << std::endl;
+// ups????
 
 ```
 ---
