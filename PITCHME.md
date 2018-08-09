@@ -166,50 +166,38 @@ logAndProcess(std::move(w));    // call with rvalue
 Which types are rvalue references?
 ```cpp
 void f1(Widget&& param);
+// rvalue reference
 
 Widget&& var1 = Widget();
+// rvalue reference
 
 auto&& var2 = var1;
+// universal reference
 
 template<typename T>
 void f2(std::vector<T>&& param);
+// rvalue reference
 
 template<typename T>
 void f3(T&& param);
+// universal reference
 
 template<typename T>
 void f4(const T&& param);
+// rvalue reference
 ```
 @[1-1]
-@[3-3]
-@[5-5]
+@[1-2]
+@[4-4]
+@[4-5]
+@[7-7]
 @[7-8]
 @[10-11]
-@[13-14]
----
-Solutions...
-```cpp
-void f1(Widget&& param);			// rvalue reference
-
-Widget&& var1 = Widget();		  // rvalue reference
-
-auto&& var2 = var1;				// universal reference
-
-template<typename T>
-void f2(std::vector<T>&& param);	// rvalue reference
-
-template<typename T>
-void f3(T&& param);				 // universal reference
-
-template<typename T>
-void f4(const T&& param);		   // rvalue reference
-```
----
-
-### Distinguish @color[orange](universal) references from  @color[orange](rvalue) references
-* rvalue references: bind to rvalues, and identify eligible objects for moving
-
-* universal references: bind to everything!
+@[10-12]
+@[14-15]
+@[14-16]
+@[18-19]
+@[18-20]
 ---
 
 ### Universal references
@@ -218,6 +206,12 @@ void f4(const T&& param);		   // rvalue reference
   * Auto declarations
 
 * The form of the type declaration must be precisely T&&
+---
+
+### Distinguish @color[orange](universal) references from  @color[orange](rvalue) references
+* rvalue references: bind to rvalues, and identify eligible objects for moving
+
+* universal references: bind to everything!
 ---
 
 ### Universal references
