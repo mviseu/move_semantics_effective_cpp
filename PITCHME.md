@@ -346,8 +346,6 @@ Widget makeWidget() {
 If conditions for RVO are met, but compilers choose not to perform copy elision, then they must treat the return object as an rvalue
 ---
 
-@size[1.0em](Use std::move on rvalue references, std::forward on universal references)
-
 @size[0.9em](@color[grey](Summary))
 
 * @size[0.8em](Apply std::move to rvalue references and std::forward to universal references)
